@@ -1,0 +1,82 @@
+<html>
+<head>
+    <title>Aux vins célestes</title>
+
+    <link 
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    
+</head>
+
+<body>
+    <header class="container my-4">
+        <div class="row align-items-center">
+            <div class="col-md-3">
+                <div>
+                    <img class = "logo" src="img/logo.png"/>
+                </div>
+            </div>
+            <div class="col-md-7">  
+                
+            </div>
+            <div class="col-md-2">  
+                <button id="bouton-panier" type="button" class="btn btn-custom"> Panier </button>
+                <button id="bouton-login" type="button" class="btn btn-custom"> Login </button>
+            </div>
+        </div>
+        <div class="">
+            
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">                
+                <!-- Bouton hamburger pour mobile -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <!-- Conteneur du menu -->
+                <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+
+                    <!-- TODO C'est ici qu'on va construire en javascript ces liens (tests pour le moment pour le css)-->
+                    <li class="nav-item me-2">
+                    <button type="button" class="btn btn-outline-primary category-btn" data-category="tous">Tous les vins</button>
+                    </li>
+                    <li class="nav-item me-2">
+                    <button type="button" class="btn btn-outline-secondary category-btn" data-category="categorie1">Vins rouges</button>
+                    </li>
+                    <li class="nav-item me-2">
+                    <button type="button" class="btn btn-outline-secondary category-btn" data-category="categorie2">Vins blancs</button>
+                    </li>
+                    <li class="nav-item me-2">
+                    <button type="button" class="btn btn-outline-secondary category-btn" data-category="categorie3">Vins rosés</button>
+                    </li>
+                    <!-- FIN TODO -->
+
+                </ul>
+                </div>
+            </div>
+            </nav>
+
+ 
+
+
+        </div>
+    </header>
+
+    <main class="container my-4">
+        <div class="row">
+
+        </div>
+
+    </main>
+
+
+    <footer>
+        <p>© 2026 Séverine HM - Alban Martel</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="js/script.js"></script>
+
+</body>
+
+</html>
