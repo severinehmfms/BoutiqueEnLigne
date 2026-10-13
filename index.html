@@ -24,42 +24,50 @@
                 <button id="bouton-login" type="button" class="btn btn-custom"> Login </button>
             </div>
         </div>
-        <div class="">
-            
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">                
-                <!-- Bouton hamburger pour mobile -->
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-                </button>
+        <div class="row align-items-center">
+            <div class="col-md-3">
                 
-                <!-- Conteneur du menu -->
-                <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-
-                    <!-- TODO C'est ici qu'on va construire en javascript ces liens (tests pour le moment pour le css)-->
-                    <li class="nav-item me-2">
-                    <button type="button" class="btn btn-outline-primary category-btn" data-category="tous">Tous les vins</button>
-                    </li>
-                    <li class="nav-item me-2">
-                    <button type="button" class="btn btn-outline-secondary category-btn" data-category="categorie1">Vins rouges</button>
-                    </li>
-                    <li class="nav-item me-2">
-                    <button type="button" class="btn btn-outline-secondary category-btn" data-category="categorie2">Vins blancs</button>
-                    </li>
-                    <li class="nav-item me-2">
-                    <button type="button" class="btn btn-outline-secondary category-btn" data-category="categorie3">Vins rosés</button>
-                    </li>
-                    <!-- FIN TODO -->
-
-                </ul>
-                </div>
             </div>
-            </nav>
+        
+            <div class="col-md-9">  
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <div class="container-fluid">                
+                        <!-- Bouton hamburger pour mobile -->
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        
+                        <!-- Conteneur du menu -->
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav">
 
- 
+                                <!-- TODO C'est ici qu'on va construire en javascript ces liens (tests pour le moment pour le css)-->
+                                <!-- TODO Penser à mettre active pour la catégorie active-->
+                                <li class="nav-item me-2">
+                                    <button type="button" class="btn btn-outline-primary btn-custom category-btn active" data-category="tous">Tous les vins</button>
+                                </li>
+                                <li class="nav-item me-2">
+                                    <button type="button" class="btn btn-outline-secondary btn-custom category-btn" data-category="categorie1">Vins rouges</button>
+                                </li>
+                                <li class="nav-item me-2">
+                                    <button type="button" class="btn btn-outline-secondary btn-custom category-btn" data-category="categorie2">Vins blancs</button>
+                                </li>
+                                <li class="nav-item me-2">
+                                    <button type="button" class="btn btn-outline-secondary btn-custom category-btn" data-category="categorie3">Vins rosés</button>
+                                </li>
+                                <li class="nav-item me-2">
+                                    <button type="button" class="btn btn-outline-secondary btn-custom category-btn" data-category="categorie4">Vins à bulle</button>
+                                </li>
+                                <li class="nav-item me-2">
+                                    <button type="button" class="btn btn-outline-secondary btn-custom category-btn" data-category="categorie5">Vins moelleux</button>
+                                </li>
+                                <!-- FIN TODO-->
 
-
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
         </div>
     </header>
 
