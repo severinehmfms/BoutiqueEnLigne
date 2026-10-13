@@ -18,7 +18,7 @@ rectangle "Application Vente de Vins" {
 
   usecase "Se connecter" as UC_Connexion
 
-  usecase "Ajouter au Panier" as UC_cart
+  usecase "Constituer panier" as UC_cart
   note right of UC_cart
     Regroupe :
     - Ajouter / Retirer un article ou des articles
@@ -58,5 +58,9 @@ UC_cart ..> UC_page : <<extends>>
 
 
 admin -- UC_Admin
+
 UC_Admin ..> UC_Connexion : <<includes>>
+
+/' --- HERITAGE ---'/
+user <|-- admin
 @enduml
