@@ -1,0 +1,22 @@
+body{
+    background-color: #F9F0E4;
+}
+
+/*On force la dimension pour le logo pour qu'il ne soit pas trop gros */
+.logo{
+    width:150px;
+    height: auto;
+}
+
+/*On surcharge les classes boutons pour qu'ils soient de la couleur souhaitée*/
+.btn-custom {
+    background-color: #7D7872;
+    border-color: #7D7872;
+    color: #ffffff;
+}
+
+.btn-custom:hover {
+    background-color: #68635e;
+    border-color: #68635e;
+    color: #ffffff;
+}
