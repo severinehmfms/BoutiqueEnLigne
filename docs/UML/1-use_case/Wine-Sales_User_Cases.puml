@@ -1,0 +1,73 @@
+@startuml
+left to right direction
+
+/' --- ACTEURS --- '/
+actor "Utilisateur" as user
+actor "Utilisateur connecté" as member
+actor "Administrateur" as admin
+actor "Préparateur de commande" as order_picker
+
+
+rectangle "Application Vente de Vins" {
+
+  usecase "S'inscrire" as UC_Inscription
+
+  usecase "Consulter liste des articles " as UC_page
+  note right of UC_page
+    Regroupe :
+    - Afficher une liste d'articles
+    - Filtrer par catégories
+  end note
+  
+
+  usecase "Se connecter" as UC_Connexion
+
+  usecase "Ajouter au Panier" as UC_cart
+  note right of UC_cart
+    Regroupe :
+    - Ajouter / Retirer un article ou des articles
+	end note
+	
+  usecase "Passer commande" as UC_Commande
+  note right of UC_Commande
+    Regroupe :
+    - Validation du panier
+    - Payer
+    - Vider le panier
+	-
+    
+    Règle :
+    - Un panier valide doit contenir 
+      au moins 1 article pour commander
+  end note
+  
+  usecase "Gérer les articles et les catégories" as UC_Admin
+  note right of UC_Admin
+  Regroupe : 
+  - Ajouter un article
+  - Ajouter une catégorie
+  - Supprimer un article
+  - Supprimer une catégorie
+  - Augmenter ou diminuer les quantités d'articles
+  end note
+
+  usecase "Préparer les commandes" as UC_prepare
+}
+
+/' --- RELATIONS ACTEURS <--> CAS D'UTILISATION ---'/
+
+user -- UC_page
+user -- UC_Inscription
+
+member -- UC_Commande
+
+UC_cart ..> UC_page : <<extends>>
+UC_Commande ..> UC_Connexion : <<includes>>
+
+order_picker -- UC_prepare
+order_picker ..> UC_Connexion : <<includes>> 
+
+
+admin -- UC_Admin
+UC_Admin ..> UC_Connexion : <<includes>>
+@enduml
