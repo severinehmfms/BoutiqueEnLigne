@@ -3,14 +3,10 @@ left to right direction
 
 /' --- ACTEURS --- '/
 actor "Utilisateur" as user
-actor "Utilisateur connecté" as member
 actor "Administrateur" as admin
-actor "Préparateur de commande" as order_picker
 
 
 rectangle "Application Vente de Vins" {
-
-  usecase "S'inscrire" as UC_Inscription
 
   usecase "Consulter liste des articles " as UC_page
   note right of UC_page
@@ -34,7 +30,6 @@ rectangle "Application Vente de Vins" {
     - Validation du panier
     - Payer
     - Vider le panier
-	-
     
     Règle :
     - Un panier valide doit contenir 
@@ -51,21 +46,15 @@ rectangle "Application Vente de Vins" {
   - Augmenter ou diminuer les quantités d'articles
   end note
 
-  usecase "Préparer les commandes" as UC_prepare
 }
 
 /' --- RELATIONS ACTEURS <--> CAS D'UTILISATION ---'/
 
 user -- UC_page
-user -- UC_Inscription
-
-member -- UC_Commande
+user -- UC_cart
+user -- UC_Commande
 
 UC_cart ..> UC_page : <<extends>>
-UC_Commande ..> UC_Connexion : <<includes>>
-
-order_picker -- UC_prepare
-order_picker ..> UC_Connexion : <<includes>> 
 
 
 admin -- UC_Admin
