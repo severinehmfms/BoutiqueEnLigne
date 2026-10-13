@@ -15,8 +15,10 @@ body{
     color: #ffffff;
 }
 
-.btn-custom:hover {
-    background-color: #68635e;
+.btn-custom:hover,
+.btn-custom.active {
+    background-color: #3D3B38;
     border-color: #68635e;
     color: #ffffff;
 }
+
