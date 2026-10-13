@@ -1,5 +1,18 @@
-body{
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+
     background-color: #F9F0E4;
+}
+
+/*On passe en flex le container principal : s'il n'y a pas assez d'articles pour remplir la page, cette zone s'agrandit pour occuper tout l'espace vide restant*/
+.page-content {
+    flex: 1;
 }
 
 /*On force la dimension pour le logo pour qu'il ne soit pas trop gros */
