@@ -49,7 +49,6 @@ async function main() {
             item.id_categorie,
             item.nom_categorie
         );
-        console.log("création d'une variable locale category");
 
         //On crée le bouton dans le menu pour cette catégorie
         menuCategories.innerHTML += `
@@ -61,15 +60,55 @@ async function main() {
                 </button>
             </li>
         `;
-
-        console.log("Création des boutons catégories faites !");
     });
+
+    console.log("Création des boutons catégories faites !");
     
     //A l'initialisation on récupère tous les articles quelque soit la catégorie
     let allArticles = recupererTousLesArticles(stock);
     
     //On affiche les articles
     afficherArticles(allArticles);
+
+    //On ajoute le listener au menu des catégories qui va actualiser la liste des articles affichés
+    menuCategories.addEventListener("click", function(event) {
+        // On vérifie si le clic concerne un bouton de catégorie
+        let bouton = event.target.closest(".category-btn");
+
+        // Si le clic ne concerne pas un bouton, on arrête
+        if (bouton === null) {
+            return;
+        }
+
+        // On récupère l'identifiant de la catégorie cliquée
+        let idCategorie = bouton.dataset.category;
+        //console.log(idCategorie);
+
+        let articlesAAfficher;
+
+        //Si on a choisi l'affichage de tous les articles on utilise la liste existante
+        if (idCategorie === "tous") {
+            articlesAAfficher = allArticles;
+        } else {
+            //On filtre la liste de tous les articles pour ne récupérer que ceux qui ont pour idCategorie celle du bouton
+            articlesAAfficher = allArticles.filter(function(article) {
+                return String(article.idCategorie) === idCategorie;
+            });
+        }
+
+        //On affiche les articles
+        afficherArticles(articlesAAfficher);
+
+        //On affiche la boutique
+        afficherBoutique();
+    });
+
+    //On ajoute le listener sur le bouton "Panier" qui affiche le panier
+    let boutonPanier = document.getElementById("bouton-panier");
+    boutonPanier.addEventListener("click", function(event) {
+        //On affiche le panier
+        afficherPagePanier();
+    });
 
     console.log("Fin du programme");
 }
@@ -88,6 +127,8 @@ function recupererTousLesArticles(stock) {
                     item.nom,
                     item.appellation,
                     item.prix_euros,
+                    item.stock_bouteilles,
+                    item.volume_litres,
                     categorie.id_categorie
                 );
 
@@ -136,6 +177,22 @@ function afficherArticles(articlesToShow){
         </div>
         `;
     });
+}
+
+//Fonction qui affiche le panier (et masque la liste des articles)
+function afficherPagePanier() {
+    let lstArticles = document.getElementById("lst-articles");
+    let panier = document.getElementById("panier");
+    lstArticles.classList.add("d-none");
+    panier.classList.remove("d-none");
+}
+
+//Fonction qui affiche la boutique (et masque le panier)
+function afficherBoutique() {
+    let lstArticles = document.getElementById("lst-articles");
+    let panier = document.getElementById("panier");
+    panier.classList.add("d-none");
+    lstArticles.classList.remove("d-none");
 }
 
 main();
