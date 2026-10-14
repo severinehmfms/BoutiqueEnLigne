@@ -7,34 +7,18 @@ export default class Cart {
     #listOfArticles;
     #validationCartDate
 
-    /* Constructeur avec un seul paramètre l'id du panier */
     /**
-     * @param {number} idCart - l'identifiant du panier
-     */
-    constructor(idCart) {
-        if (typeof idCart !== 'number') {
-            throw new Error("l'id du panier doit être un nombre");
-        }
-        /** @type {number} */
-        this.idCart = idCart;
-
-        /** @type {Date} */
-        this.creationDate = new Date();
-
-        /** @type {Article[]} */
-        this.listOfArticles = [];
-
-        /** @type {Date} */
-        this.validationCartDate = null;
-    }
-
-    /* Constructeur avec des éléments, l'id et la date de création du panier */
-    /**
-     *
+     * Constructeur avec des éléments, l'id et la date de création du panier
+     * 
      * @param {number} idCart - l'identifiant du panier
      * @param {Date} creationDate - la date de création du panier de type Date
+     * @param {Date} validationCartDate - la date de validation du panier de type Date 
+     * 
+     * Si creationDate n'est pas défini alors c'est la date d'instantiation
+     * de l'objet qui est prise en compte.
+     * Si validationCartDate n'est pas défini, par défaut, ce paramètre est null
      */
-    constructor(idCart, creationDate) {
+    constructor(idCart, creationDate = newDate(), validationCartDate = null) {
         if (typeof idCart !== 'number') {
             throw new Error("l'idCart du panier doit être un nombre");
         }
@@ -58,7 +42,7 @@ export default class Cart {
         this.listOfArticles = [];
 
         /** @type {Date} */
-        this.validationCartDate = null;
+        this.validationCartDate = validationCartDate;
     }
 
 
@@ -77,6 +61,12 @@ export default class Cart {
 
     get validationCartDate() {
         return this.#validationCartDate;
+    }
+
+    /* Les Setters */
+
+    set validationCartDate(newDate){
+        this.#validationCartDate = newDate;
     }
 
     /**
