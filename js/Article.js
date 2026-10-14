@@ -38,10 +38,16 @@ export default class Article {
     }
 
     setPrix(prix) {
+        if (typeof prix !== 'number') {
+            throw new Error("le prix de l'article doit être un entier");
+        }
         this.prix = prix;
     }
 
     setQuantity(quantity) {
+        if (typeof prix !== 'quantity') {
+            throw new Error("la quantité de l'article doit être un entier");
+        }
         this.quantity = quantity;
     }
 
