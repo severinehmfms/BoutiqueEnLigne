@@ -39,30 +39,8 @@
                         
                         <!-- Conteneur du menu -->
                         <div class="collapse navbar-collapse" id="navbarNav">
-                            <ul class="navbar-nav">
-
-                                <!-- TODO C'est ici qu'on va construire en javascript ces liens (tests pour le moment pour le css)-->
-                                <!-- TODO Penser à mettre active pour la catégorie active-->
-                                <li class="nav-item me-2">
-                                    <button type="button" class="btn btn-outline-primary btn-custom category-btn active" data-category="tous">Tous les vins</button>
-                                </li>
-                                <li class="nav-item me-2">
-                                    <button type="button" class="btn btn-outline-secondary btn-custom category-btn" data-category="categorie1">Vins rouges</button>
-                                </li>
-                                <li class="nav-item me-2">
-                                    <button type="button" class="btn btn-outline-secondary btn-custom category-btn" data-category="categorie2">Vins blancs</button>
-                                </li>
-                                <li class="nav-item me-2">
-                                    <button type="button" class="btn btn-outline-secondary btn-custom category-btn" data-category="categorie3">Vins rosés</button>
-                                </li>
-                                <li class="nav-item me-2">
-                                    <button type="button" class="btn btn-outline-secondary btn-custom category-btn" data-category="categorie4">Vins à bulle</button>
-                                </li>
-                                <li class="nav-item me-2">
-                                    <button type="button" class="btn btn-outline-secondary btn-custom category-btn" data-category="categorie5">Vins moelleux</button>
-                                </li>
-                                <!-- FIN TODO-->
-
+                            <ul class="navbar-nav" id="menusCategories">
+                                
                             </ul>
                         </div>
                     </div>
@@ -72,61 +50,14 @@
     </header>
 
     <main class="container my-4 page-content">
-        <!-- TODO dans ce div lst_articles on va charger en javascript les articles dans des div class="article"-->
         <div class="row g-4 " id="lst-articles">
-            
-            <!-- TODO C'est EXACTEMENT ce code qu'il faudra mettre pour chaque article, bien sur en récupérant les données-->
-            <div class="col-12 col-sm-4 col-lg-2">
-                <div class="card h-100 shadow-sm">
-
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title fs-6">101 - Château des Cèdres</h5>
-                        <p class="card-text text-muted small">Appellation : Saint-Émilion</p>
-                        <div class="mt-auto">
-                            <div class="input-group input-group-sm" style="width: 120px;">
-                                <button class="btn btn-outline-secondary" type="button">-</button>
-                                <input type="number" class="form-control text-center" value="1" min="1">
-                                <button class="btn btn-outline-secondary" type="button">+</button>
-                            </div>
-                            <!-- Le bouton Ajouter au panier -->
-                            <button type="button" class="btn btn-primary btn-sm btn-custom flex-grow-1">
-                                Ajouter au panier
-                            </button>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="col-12 col-sm-4 col-lg-2">
-                <div class="card h-100 shadow-sm">
-
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title fs-6">101 - Château des Cèdres</h5>
-                        <p class="card-text text-muted small">Appellation : Saint-Émilion</p>
-                        <div class="mt-auto">
-                            <div class="input-group input-group-sm" style="width: 120px;">
-                                <button class="btn btn-outline-secondary" type="button">-</button>
-                                <input type="number" class="form-control text-center" value="1" min="1">
-                                <button class="btn btn-outline-secondary" type="button">+</button>
-                            </div>
-                            <!-- Le bouton Ajouter au panier -->
-                            <button type="button" class="btn btn-primary btn-sm btn-custom flex-grow-1">
-                                Ajouter au panier
-                            </button>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- TODO FIN DU DIV Exemple -->
-            
-            <!-- Bouton Charger plus -->
-            <div class="text-center mt-4">
-                <button id="btn-charger-plus" class="btn btn-outline-primary btn-custom px-4">Charger plus</button>
-            </div>
+            <!-- Les cartes des vins seront ajoutées ici -->
         </div>
+
+        <!-- TODO Bouton Charger plus -Fonctionnalité à rajouter -->
+        <!--<div class="text-center mt-4">
+            <button id="btn-charger-plus" class="btn btn-outline-primary btn-custom px-4">Charger plus</button>
+        </div>-->
 
         <!-- TODO Dans ce div id=panier on mettra automatiquement les informations du panier, ce div sera affiché quand on clique sur panier (et on masquera la liste)-->
         <div class="row g-4 " id="panier">
