@@ -1,14 +1,7 @@
 // Importation de la classe Article
 import Article from './Article.js';
 import Category from './Category.js';
-import loadJsonDate from './fonctions.js';
-/*
-try {
-    const article = new Article("REF123", "Vin rouge brillant", "Bordeaux", 15.99);
-    console.log(article.greet());
-} catch (error) {
-    console.error("Erreur :", error.message);
-}*/
+import { loadJsonDate } from './fonctions.js';
 
 async function main() {
 
@@ -24,6 +17,14 @@ async function main() {
         console.error("Attention, Les données du stock ne sont pas chargées");
     }
 
+    /*
+    try {
+        const article = new Article("REF123", "Vin rouge brillant", "Bordeaux", 15.99);
+        console.log(article.greet());
+    } catch (error) {
+        console.error("Erreur :", error.message);
+    }
+    */
 
     //On va construire le menu des catégories
     let listeCategories = [];
