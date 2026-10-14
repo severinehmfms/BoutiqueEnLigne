@@ -82,7 +82,7 @@ async function main() {
 
         // On récupère l'identifiant de la catégorie cliquée
         let idCategorie = bouton.dataset.category;
-        //console.log(idCategorie);
+        console.log(idCategorie);
 
         let articlesAAfficher;
 
