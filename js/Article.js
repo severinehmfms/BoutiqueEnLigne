@@ -8,45 +8,21 @@ export default class Article {
     #quantity;
     #volume;
 
-
-    constructor(reference, nom, appellation, prix) {
-        if (typeof reference !== 'number' || typeof nom !== 'string' || typeof prix !== 'number') {
-            throw new Error("Paramètres invalides : la référence, le prix doivent être un nombre, le nom doit être une chaîne.");
-        }
-
-        //Vérification des valeurs vides
-        if(!nom || nom.trim() === "") {
-            throw new Error("Le nom ne peut être vide.")
-        }
-
-        if(isNaN(reference)) {
-            throw new Error("La référence ne peut être NaN.")
-        }
-
-        if(isNaN(prix)) {
-            throw new Error("Le prix ne peut être NaN.")
-        }
-
-        /* Correspond à id_article dans JSON */
-        /** @type {number} */
-        this.reference = reference;
-        /** @type {string} */
-        this.nom = nom;
-        /** @type {string} */
-        this.appellation = appellation;
-        /* Correspond à prix_euros dans JSON */
-        /** @type {number} */
-        this.prix = prix;
-        /* Correspond à stock_bouteilles dans JSON */
-        /** @type {number}  */
-        this.quantity = 0;
-        /* Correspond au volume_littres */
-        /** @type {number} */
-        this.volume = 0.75;
-    }
-
-    
-    constructor(reference, nom, appellation, prix, quantity, volume) {
+    /**
+     * Constructeur de la classe Article
+     * 
+     * @param {number} reference - correspond à l'id_article dans le fichier JSON
+     * @param {string} nom - nom du châteur par exemple
+     * @param {string} appellation - appelation de l'article vin 
+     * @param {number} prix - prix de l'article vin
+     * @param {number} quantity - quantité de l'article vin correspond à stock_bouteilles dans JSON 
+     * @param {number} volume - volume de l'article au volume_littres dans le fichier JSON
+     * 
+     * si prix n'est pas fourni, l'article fait 12,50.
+     * si quantité n'est pas fournie, par défaut elle fait 1.
+     * si volume n'est pas fourni, l'article faut 75 cl par défaut
+     */
+    constructor(reference, nom, appellation, prix = 12.50, quantity = 1, volume = 0.75) {
         /*Vérification des types */
         if (typeof reference !== 'number') {
             throw new Error("La référence doit être un nombre.");
