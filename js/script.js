@@ -1,12 +1,13 @@
 // Importation de la classe Article
 import Article from './Article.js';
-
+import Category from './Category.js';
+/*
 try {
     const article = new Article("REF123", "Vin rouge brillant", "Bordeaux", 15.99);
     console.log(article.greet());
 } catch (error) {
     console.error("Erreur :", error.message);
-}
+}*/
 
 async function loadJsonData(file) {
 
@@ -39,6 +40,14 @@ async function main() {
     const stock = await loadJsonData(stockJson);
 
     console.log(stock);
+
+    
+
+
+
+
+
+
 
     console.log("Fin du programme");
 }
