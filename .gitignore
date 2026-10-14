@@ -1,16 +1,21 @@
 liengit.txt
 
 # WebStorm
-.idea/*
+.idea/
+# Pour éventuellement partager des fichiers de réglages d'équipe 
+# !.idea/codeStyles/
+# !.idea/scopes/
+# !.idea/inspectionProfiles/
 
 # Visual Studio Code
 .vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-!.vscode/*.code-snippets
-!*.code-workspace
+# Pour éventuellement partager des fichiers de réglages d'équipe 
+#!.vscode/settings.json
+#!.vscode/tasks.json
+#!.vscode/launch.json
+#!.vscode/extensions.json
+#!.vscode/*.code-snippets
+#!*.code-workspace
 
 # Built Visual Studio Code Extensions
 *.vsix
