@@ -7,6 +7,7 @@ export default class Article {
     #prix;
     #quantity;
     #volume;
+    #idCategory;
 
     /**
      * Constructeur de la classe Article
@@ -17,12 +18,13 @@ export default class Article {
      * @param {number} prix - prix de l'article vin
      * @param {number} quantity - quantité de l'article vin correspond à stock_bouteilles dans JSON 
      * @param {number} volume - volume de l'article au volume_littres dans le fichier JSON
+     * @param {number} idCategory - identifiant de la catégorie mère de l'article vin
      * 
      * si prix n'est pas fourni, l'article fait 12,50.
      * si quantité n'est pas fournie, par défaut elle fait 1.
      * si volume n'est pas fourni, l'article faut 75 cl par défaut
      */
-    constructor(reference, nom, appellation, prix = 12.50, quantity = 1, volume = 0.75) {
+    constructor(reference, nom, appellation, prix = 12.50, quantity = 1, volume = 0.75, idCategory) {
         /*Vérification des types */
         if (typeof reference !== 'number') {
             throw new Error("La référence doit être un nombre.");
@@ -48,6 +50,10 @@ export default class Article {
             throw new Error("Le volume doit être un nombre.");
         }
 
+        if (typeof idCategory !== 'number') {
+            throw new Error("L'idCategory doit être un nombre.");
+        }
+
         //Vérification des valeurs vides
         if(isNaN(reference)) {
             throw new Error("La référence ne peut être NaN.")
@@ -71,6 +77,10 @@ export default class Article {
 
         if(isNaN(volume)) {
             throw new Error("Le volume ne peut être NaN.")
+        }
+
+        if(isNaN(idCategory)) {
+            throw new Error("L'idCategory volume ne peut être NaN.")
         }
 
         /* Correspond à id_article dans JSON */
@@ -117,26 +127,64 @@ export default class Article {
         return this.#volume;
     }
 
+    get idCategory(){
+        return this.#idCategory
+    }
+
     /* LES SETTERS */
+    set reference(reference){
+        if (typeof reference !== 'number'){
+            throw new Error("le prix de l'article doit être un entier");
+        }
+        this.#reference = reference;
+    }
+
+    set nom(nom){
+        if (typeof nom !== 'string') {
+            throw new Error("Le nom doit être une chaîne de caractères.");
+        }
+        if(!nom || nom.trim() === "") {
+            throw new Error("Le name ne peut être vide.")
+        }
+        this.#nom = nom;
+    }
+
+    set appellation(appellation){
+        if (typeof appellation !== 'string') {
+            throw new Error("L'appellation doit être une chaîne de caractères.");
+        }
+        if(!appellation || appellation.trim() === "") {
+            throw new Error("L'appelation ne peut être vide.")
+        }
+        this.#appellation = appellation;
+    }
+
     set prix(prix) {
         if (typeof prix !== 'number') {
             throw new Error("le prix de l'article doit être un entier");
         }
-        this.prix = prix;
+        this.#prix = prix;
     }
 
     set quantity(quantity) {
         if (typeof quantity !== 'number') {
             throw new Error("la quantité de l'article doit être un entier");
         }
-        this.quantity = quantity;
+        this.#quantity = quantity;
     }
 
     set volume(volume) {
         if (typeof volume !== 'number') {
             throw new Error("le volume de l'article doit être un entier");
         }
-        this.volume = volume;
+        this.#volume = volume;
+    }
+
+    set idCategory(idCategory){
+        if (typeof idCategory !== 'number') {
+            throw new Error("l'idCategory de l'article doit être un entier");
+        }
+        this.#idCategory = idCategory;
     }
 
 
