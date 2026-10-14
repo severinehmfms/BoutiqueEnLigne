@@ -131,6 +131,11 @@ export default class Article {
         return this.#idCategory
     }
 
+    /* Alias */
+    get idCategorie(){
+        return this.#idCategory
+    }
+
     /* LES SETTERS */
     set reference(reference){
         if (typeof reference !== 'number'){
@@ -185,6 +190,13 @@ export default class Article {
             throw new Error("l'idCategory de l'article doit être un entier");
         }
         this.#idCategory = idCategory;
+    }
+
+    set idCategorie(idCategorie){
+        if (typeof idCategorie !== 'number') {
+            throw new Error("l'idCategorie de l'article doit être un entier");
+        }
+        this.#idCategory = idCategorie;
     }
 
 
