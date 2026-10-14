@@ -55,6 +55,7 @@
     </header>
 
     <main class="container my-4 page-content">
+        <!-- Pour masquer le div lst-articles par exemple quand on affiche le panier, il faudra ajouter la classe d-none (bootstrap)-->
         <div class="row g-4 " id="lst-articles">
             <!-- Les cartes des vins seront ajoutées ici -->
         </div>
@@ -65,7 +66,8 @@
         </div>-->
 
         <!-- TODO Dans ce div id=panier on mettra automatiquement les informations du panier, ce div sera affiché quand on clique sur panier (et on masquera la liste)-->
-        <div class="row g-4 " id="panier">
+        <!-- Avec bootstrap la classe d-none masque le panier par défaut-->
+        <div class="row g-4 d-none" id="panier">
             <h3> Affichage du panier </h3>
 
         </div>

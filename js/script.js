@@ -111,8 +111,17 @@ async function main() {
 
         //On affiche les articles
         afficherArticles(articlesAAfficher);
+
+        //On affiche la boutique
+        afficherBoutique();
     });
 
+    //On ajoute le listener sur le bouton "Panier" qui affiche le panier
+    let boutonPanier = document.getElementById("bouton-panier");
+    boutonPanier.addEventListener("click", function(event) {
+        //On affiche le panier
+        afficherPanier();
+    });
 
 
     console.log("Fin du programme");
@@ -178,6 +187,22 @@ function afficherArticles(articlesToShow){
         </div>
         `;
     });
+}
+
+//Fonction qui affiche le panier (et masque la liste des articles)
+function afficherPanier() {
+    let lstArticles = document.getElementById("lst-articles");
+    let panier = document.getElementById("panier");
+    lstArticles.classList.add("d-none");
+    panier.classList.remove("d-none");
+}
+
+//Fonction qui affiche la boutique (et masque le panier)
+function afficherBoutique() {
+    let lstArticles = document.getElementById("lst-articles");
+    let panier = document.getElementById("panier");
+    panier.classList.add("d-none");
+    lstArticles.classList.remove("d-none");
 }
 
 main();
