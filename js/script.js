@@ -165,11 +165,11 @@ function afficherArticles(articlesToShow){
                     <p class="card-text text-muted small">Prix : ${article.prix}</p>
                     <div class="mt-auto">
                         <div class="input-group input-group-sm" style="width: 120px;">
-                            <button class="btn btn-outline-secondary" type="button">-</button>
-                            <input type="number" class="form-control text-center" value="1" min="1">
-                            <button class="btn btn-outline-secondary" type="button">+</button>
+                            <button class="btn btn-outline-secondary" type="button" data-id-article="${article.reference}">-</button>
+                            <input type="number" class="form-control text-center" value="1" min="1" data-id-article="${article.reference}">
+                            <button class="btn btn-outline-secondary" type="button" data-id-article="${article.reference}">+</button>
                         </div>
-                        <button type="button" class="btn btn-primary btn-sm btn-custom flex-grow-1">
+                        <button type="button" class="btn btn-primary btn-sm btn-custom flex-grow-1" data-id-article="${article.reference}">
                             Ajouter au panier
                         </button>
                     </div>
