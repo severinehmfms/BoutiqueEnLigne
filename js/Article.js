@@ -1,8 +1,8 @@
 // Définition de la classe et exportation
 export default class Article {
     constructor(reference, nom, appellation, prix) {
-        if (typeof reference !== 'string' || typeof nom !== 'string' || typeof prix !== 'number') {
-            throw new Error("Paramètres invalides : la référence et le nom doivent être une chaîne, et le prix un nombre.");
+        if ( typeof nom !== 'string' || typeof prix !== 'number') { //typeof reference !== 'string' ||
+            throw new Error("Paramètres invalides : le nom doit être une chaîne, et le prix un nombre.");
         }
         this.reference = reference;
         this.nom = nom;
