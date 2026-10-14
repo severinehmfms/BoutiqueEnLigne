@@ -44,10 +44,16 @@ export default class Category {
     }
 
     set id(id){
+        if (typeof id !== 'number') {
+            throw new Error("id doit être un nombre.");
+        }
         this.#id = id;
     }
 
     set name(name){
+        if (typeof name !== 'string') {
+            throw new Error("name doit être une chaîne de caractères.");
+        }
         this.#name = name;
     }
 }
