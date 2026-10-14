@@ -42,4 +42,12 @@ export default class Category {
     get name(){
         return this.#name
     }
+
+    set id(id){
+        this.#id = id;
+    }
+
+    set name(name){
+        this.#name = name;
+    }
 }
