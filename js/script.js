@@ -1,7 +1,7 @@
 // Importation de la classe Article
 import Article from './Article.js';
 import Category from './Category.js';
-import { loadJsonDate } from './fonctions.js';
+import { loadJsonData } from './fonctions.js';
 
 async function main() {
 
@@ -12,7 +12,8 @@ async function main() {
     const stock = await loadJsonData(stockJson);
 
     if (stock && Object.keys(stock).length > 0 ) {
-        console.log("Succès, Les données Json du stock se sont chargées");
+        console.log("Succès, Les données Json du stock sont chargées");
+        console.log(stock);
     } else {
         console.error("Attention, Les données du stock ne sont pas chargées");
     }
@@ -39,9 +40,16 @@ async function main() {
             </button>
         </li>
     `;
+
     //On parcourt les catégories retournées du json 
     stock.categories.forEach(function(item) {
-        console.log("Instantiation des catégories terminée !");
+
+        //On crée l'objet catégorie
+        let category = new Category(
+            item.id_categorie,
+            item.nom_categorie
+        );
+        console.log("création d'une variable locale category");
 
         //On crée le bouton dans le menu pour cette catégorie
         menuCategories.innerHTML += `
