@@ -120,7 +120,7 @@ async function main() {
     let boutonPanier = document.getElementById("bouton-panier");
     boutonPanier.addEventListener("click", function(event) {
         //On affiche le panier
-        afficherPanier();
+        afficherPagePanier();
     });
 
 
@@ -190,7 +190,7 @@ function afficherArticles(articlesToShow){
 }
 
 //Fonction qui affiche le panier (et masque la liste des articles)
-function afficherPanier() {
+function afficherPagePanier() {
     let lstArticles = document.getElementById("lst-articles");
     let panier = document.getElementById("panier");
     lstArticles.classList.add("d-none");
