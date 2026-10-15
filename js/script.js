@@ -4,6 +4,10 @@ import Category from './Category.js';
 
 //Importation du fichier de fonctions et du fichier comportant les listeners
 import * as fonctions from "./fonctions.js";
+//On importe individuellement les fonctions appelées directement par le html
+import { removeQuantityPageShop } from "./fonctions.js";
+import { addQuantityPageShop } from "./fonctions.js";
+//On importe les listeners
 import { installListenerMenuCategories } from "./listeners.js";
 import { installListenerButtonCart } from "./listeners.js";
 
@@ -30,10 +34,8 @@ async function main() {
     //On installe les listeners
     installListenerMenuCategories(menuCategories, allArticles);
     installListenerButtonCart();
-
-
+    
     console.log("Fin du programme");
 }
-
 
 main();

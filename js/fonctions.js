@@ -1,9 +1,10 @@
 // Importation des classes
 import Article from './Article.js';
 import Category from './Category.js';
+//Importation des listeners qui doivent se recharger à chaque changement de catégorie
+import { installListenerShopQty } from "./listeners.js";
 
 export async function loadJsonData(file) {
-
     try{
         //response représente la réponse du serveur. Elle contient notamment le contenu de ton fichier JSON.
         //Mais ce contenu n'est pas encore directement utilisable comme objet JavaScript.
@@ -27,11 +28,9 @@ export async function loadJsonData(file) {
 
 //Fonction qui récupère un tableau avec tous les articles
 export function getAllArticles(stock) {
-
-    let tousLesArticles = [];
-
+    let allArticles = [];
+    //Pour chaque catégorie
     stock.categories.forEach(function(categorie) {
-
         //On récupère tous les articles, avec l'id de la catégorie
         categorie.articles.forEach(item => {
             let article = new Article(
@@ -42,12 +41,12 @@ export function getAllArticles(stock) {
                     categorie.id_categorie
                 );
 
-            tousLesArticles.push(article);
+            allArticles.push(article);
         });
 
     });
 
-    return tousLesArticles;
+    return allArticles;
 }
 
 //Fonction qui récupère les catégories dans les données retournées du JSON puis les affiche à l'écran
@@ -86,21 +85,17 @@ export function showCategories(stock, menuCategories){
             </li>
         `;
     });
-    
-
 }
 
 export function showArticles(articlesToShow){
     //On va récupérer le contenant dans lequel on souhaite écrire    
     let lstAarticles = document.getElementById("lst-articles");
+
     //On efface les données actuellement présentes
     lstAarticles.innerHTML = "";
+
     //On va envoyer le contenu pour la partie articles
     articlesToShow.forEach(function(article) {
-        //console.log(article.reference);
-        //console.log(article.nom);
-        //console.log(article.appellation);
-        //console.log(article.prix);
 
         //On crée le bloc pour cet article
         lstAarticles.innerHTML += `
@@ -112,9 +107,9 @@ export function showArticles(articlesToShow){
                     <p class="card-text text-muted small">Prix : ${article.prix}</p>
                     <div class="mt-auto">
                         <div class="input-group input-group-sm" style="width: 120px;">
-                            <button class="btn btn-outline-secondary" type="button" data-id-article="${article.reference}">-</button>
-                            <input type="number" class="form-control text-center" value="1" min="1" data-id-article="${article.reference}">
-                            <button class="btn btn-outline-secondary" type="button" data-id-article="${article.reference}">+</button>
+                            <button class="btn btn-outline-secondary" type="button" data-action="remove" data-id-article="${article.reference}">-</button>
+                            <input type="number" class="form-control text-center" value="1" min="1" id="input-shop-qty-${article.reference}">
+                            <button class="btn btn-outline-secondary" type="button" data-action="add" data-id-article="${article.reference}">+</button>
                         </div>
                         <button type="button" class="btn btn-primary btn-sm btn-custom flex-grow-1" data-id-article="${article.reference}">
                             Ajouter au panier
@@ -125,6 +120,9 @@ export function showArticles(articlesToShow){
         </div>
         `;
     });
+
+    //On installe les listeners ici pour les remettre à jour à chaque affichage
+    installListenerShopQty();
 }
 
 //Fonction qui affiche le panier (et masque la liste des articles)
@@ -141,4 +139,20 @@ export function showShop() {
     let panier = document.getElementById("panier");
     panier.classList.add("d-none");
     lstArticles.classList.remove("d-none");
+}
+
+//Fonction qui ajoute 1 à la quantité pour la référence - Page boutique (appelée au clic sur + dans la boutique pour un article)
+export function addQuantityPageShop(reference) {
+    const input = document.getElementById("input-shop-qty-" + reference);
+
+    input.value = parseInt(input.value) + 1;
+}
+
+//Fonction qui enlève 1 à la quantité pour la référence - Page boutique (appelée au clic sur + dans la boutique pour un article)
+export function removeQuantityPageShop(reference) {
+    const input = document.getElementById("input-shop-qty-" + reference);
+
+    if (parseInt(input.value) > 1) {
+        input.value = parseInt(input.value) - 1;
+    }
 }

@@ -43,3 +43,43 @@ export function installListenerButtonCart(){
         fonctions.showPageCart();
     });
 }
+
+export function installListenerShopQty() {
+    //On récupère les boutons sur la page qui ont pour data-action add ou remove (attention pour quand il y aura le panier il faudra utiliser add-cart, remove-cart etc...)
+    const boutons = document.querySelectorAll('[data-action="add"], [data-action="remove"]');
+
+    //Pour chacun des boutons on va ajouter un listener
+    boutons.forEach(function(bouton) {
+
+        bouton.addEventListener("click", function() {
+            //On récupère la référence de l'article concerné
+            const reference = this.dataset.idArticle;   //Permet de récupérer : data-id-article="${article.reference}"
+            //console.log(reference);
+
+            //On récupère le champ input qui correspond à cette référence
+            const input = document.getElementById('input-shop-qty-'+reference);
+
+            //On récupère la quantité actuelle dans ce champ
+            let quantite = parseInt(input.value);
+
+            //On met à jour la quantité
+            if (bouton.dataset.action === "add") {
+                quantite++;
+            }
+
+            if (bouton.dataset.action === "remove" && quantite > 1) {
+                quantite--;
+            }
+
+            //On met à jour le champ input avec la nouvelle valeur 
+            input.value = quantite;
+        });
+    });
+
+}
+
+/*
+export function addListenerAddToCart(){
+     const buttonAddToCart = document.getElementById;
+
+}*/
