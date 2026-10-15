@@ -1,8 +1,9 @@
 // Importation des classes
 import Article from './Article.js';
 import Category from './Category.js';
-//Importation des listeners qui doivent se recharger à chaque changement de catégorie
+//Importation des listeners directement liés aux articles affichés
 import { installListenerShopQty } from "./listeners.js";
+import { installListenerAddToCart } from "./listeners.js";
 
 export async function loadJsonData(file) {
     try{
@@ -111,7 +112,7 @@ export function showArticles(articlesToShow){
                             <input type="number" class="form-control text-center" value="1" min="1" id="input-shop-qty-${article.reference}">
                             <button class="btn btn-outline-secondary" type="button" data-action="add" data-id-article="${article.reference}">+</button>
                         </div>
-                        <button type="button" class="btn btn-primary btn-sm btn-custom flex-grow-1" data-id-article="${article.reference}">
+                        <button type="button" class="btn btn-primary btn-sm btn-custom flex-grow-1" data-action="add-to-cart" data-id-article="${article.reference}">
                             Ajouter au panier
                         </button>
                     </div>
@@ -121,8 +122,9 @@ export function showArticles(articlesToShow){
         `;
     });
 
-    //On installe les listeners ici pour les remettre à jour à chaque affichage
+    //On installe les listeners liés aux articles ici pour les remettre à jour à chaque affichage
     installListenerShopQty();
+    installListenerAddToCart();
 }
 
 //Fonction qui affiche le panier (et masque la liste des articles)
@@ -155,4 +157,11 @@ export function removeQuantityPageShop(reference) {
     if (parseInt(input.value) > 1) {
         input.value = parseInt(input.value) - 1;
     }
+}
+
+//Fonction qui ajoute un article au panier
+export function addToCart(reference, qty){
+    console.log("On va ajouter l'article " + reference + " au panier. Quantité : " + qty);
+
+
 }

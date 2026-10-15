@@ -1,5 +1,6 @@
 import * as fonctions from "./fonctions.js";
 
+//Installation des listeners sur le menu des catégories
 export function installListenerMenuCategories(menuCategories, allArticles) {
     //On ajoute le listener au menu des catégories qui va actualiser la liste des articles affichés
     menuCategories.addEventListener("click", function(event) {
@@ -35,6 +36,7 @@ export function installListenerMenuCategories(menuCategories, allArticles) {
     });
 }
 
+//Installation du listener sur le bouton Panier qui affiche le panier
 export function installListenerButtonCart(){
     //On ajoute le listener sur le bouton "Panier" qui affiche le panier
     let boutonPanier = document.getElementById("bouton-panier");
@@ -44,6 +46,7 @@ export function installListenerButtonCart(){
     });
 }
 
+//Installation des listeners sur les boutons + et - de l'affichage des articles
 export function installListenerShopQty() {
     //On récupère les boutons sur la page qui ont pour data-action add ou remove (attention pour quand il y aura le panier il faudra utiliser add-cart, remove-cart etc...)
     const boutons = document.querySelectorAll('[data-action="add"], [data-action="remove"]');
@@ -78,8 +81,17 @@ export function installListenerShopQty() {
 
 }
 
-/*
-export function addListenerAddToCart(){
-     const buttonAddToCart = document.getElementById;
+//On ajoute un listener sur les boutons ajouter au panier de la page des articles
+export function installListenerAddToCart(){
+    const boutons = document.querySelectorAll('[data-action="add-to-cart"]');
 
-}*/
+    boutons.forEach(function(bouton) {
+        bouton.addEventListener("click", function(event) {
+            const reference = event.currentTarget.dataset.idArticle; 
+            const inputQty = document.getElementById("input-shop-qty-" + reference);
+            const qty = parseInt(inputQty.value);
+            fonctions.addToCart(reference, qty);
+        });
+    });
+
+}
