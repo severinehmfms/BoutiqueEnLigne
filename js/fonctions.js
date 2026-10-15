@@ -88,7 +88,7 @@ export function showCategories(stock, menuCategories){
     });
 }
 
-export function showArticles(articlesToShow){
+export function showArticles(articlesToShow, cartEnCours){
     //On va récupérer le contenant dans lequel on souhaite écrire    
     let lstAarticles = document.getElementById("lst-articles");
 
@@ -124,7 +124,7 @@ export function showArticles(articlesToShow){
 
     //On installe les listeners liés aux articles ici pour les remettre à jour à chaque affichage
     installListenerShopQty();
-    installListenerAddToCart();
+    installListenerAddToCart(articlesToShow, cartEnCours);
 }
 
 //Fonction qui affiche le panier (et masque la liste des articles)
@@ -160,8 +160,9 @@ export function removeQuantityPageShop(reference) {
 }
 
 //Fonction qui ajoute un article au panier
-export function addToCart(reference, qty){
-    console.log("On va ajouter l'article " + reference + " au panier. Quantité : " + qty);
-
-
+export function addToCart(article, qty, cartEnCours){
+    console.log("On va ajouter l'article " + article.reference + " au panier. Quantité : " + qty);
+    console.log(cartEnCours);
+    //On l'ajoute au panier TODO Pas encore fonctionnel
+    //cartEnCours.addProduct(article);
 }

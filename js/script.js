@@ -20,25 +20,24 @@ async function main() {
     const stockJson = "data/wine_stock.json"
     const stock = await fonctions.loadJsonData(stockJson);
 
-    console.log(stock);
-
-    //On affiche les catégories
-    let menuCategories = document.getElementById("menusCategories");
-    fonctions.showCategories(stock, menuCategories);
-        
+    //console.log(stock);
+    
     //A l'initialisation on récupère tous les articles quelque soit la catégorie
     let allArticles = fonctions.getAllArticles(stock);
     
+    //A l'initialisation on construit le panier
+    let cartEnCours = new Cart();
+    
+    //On affiche les catégories
+    let menuCategories = document.getElementById("menusCategories");
+    fonctions.showCategories(stock, menuCategories);
+    
+    //On installe les listeners pour les menus des catégories et pour le bouton panier
+    installListenerMenuCategories(menuCategories, allArticles, cartEnCours);
+    installListenerButtonCart();        
+    
     //On affiche tous les articles
-    fonctions.showArticles(allArticles);
-
-    //On installe les listeners
-    installListenerMenuCategories(menuCategories, allArticles);
-    installListenerButtonCart();
-
-    //OA l'initialisation on construit le panier
-    //let idcart = 1001; //TODO Est ce obligatoire d'avoir un id? 
-    let cartEnCours = new Cart();    
+    fonctions.showArticles(allArticles, cartEnCours);
     
     console.log("Fin du programme");
 }

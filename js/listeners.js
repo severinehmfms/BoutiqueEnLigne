@@ -1,7 +1,7 @@
 import * as fonctions from "./fonctions.js";
 
 //Installation des listeners sur le menu des catégories
-export function installListenerMenuCategories(menuCategories, allArticles) {
+export function installListenerMenuCategories(menuCategories, allArticles, cartEnCours) {
     //On ajoute le listener au menu des catégories qui va actualiser la liste des articles affichés
     menuCategories.addEventListener("click", function(event) {
         // On vérifie si le clic concerne un bouton de catégorie
@@ -29,7 +29,7 @@ export function installListenerMenuCategories(menuCategories, allArticles) {
         }
 
         //On affiche les articles
-        fonctions.showArticles(articlesAAfficher);
+        fonctions.showArticles(articlesAAfficher, cartEnCours);
 
         //On affiche la boutique
         fonctions.showShop();
@@ -82,7 +82,7 @@ export function installListenerShopQty() {
 }
 
 //On ajoute un listener sur les boutons ajouter au panier de la page des articles
-export function installListenerAddToCart(){
+export function installListenerAddToCart(articlesPageCourante, cartEnCours){  //
     const boutons = document.querySelectorAll('[data-action="add-to-cart"]');
 
     boutons.forEach(function(bouton) {
@@ -90,7 +90,15 @@ export function installListenerAddToCart(){
             const reference = event.currentTarget.dataset.idArticle; 
             const inputQty = document.getElementById("input-shop-qty-" + reference);
             const qty = parseInt(inputQty.value);
-            fonctions.addToCart(reference, qty);
+
+            console.log(articlesPageCourante);
+
+            //On récupère l'objet article correspondant à la référence
+            const article = articlesPageCourante.find(function(article) {
+                return article.reference == reference;
+            });
+
+            fonctions.addToCart(article, qty, cartEnCours);
         });
     });
 
