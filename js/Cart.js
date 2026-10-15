@@ -4,7 +4,7 @@ export default class Cart {
     /* Propriétés privées */
     #idCart;
     #creationDate;
-    #listOfArticles;
+    #listOfProducts;
     #validationCartDate
 
     /**
@@ -28,21 +28,18 @@ export default class Cart {
             throw new Error("idCart ne peut être NaN.")
         }
 
-        /** @type {number} */
-        this.idCart = idCart;
         /* Vérifier que créationDate existe et qu'il est de type Date */
         if (creationDate && !(creationDate instanceof Date)) {
             throw new Error("CreationDate du panier doit être une date");
         }
 
-        /** @type {Date} */
-        this.creationDate = creationDate;
-
         /** @type {Article[]} */
-        this.listOfArticles = [];
+        this._listOfproducts = [];
 
         /** @type {Date} */
-        this.validationCartDate = validationCartDate;
+        this._validationCartDate = validationCartDate;
+        this._idCart = idCart;
+        this._creationDate = creationDate;
     }
 
 
@@ -65,6 +62,29 @@ export default class Cart {
 
     /* Les Setters */
 
+    set creationDate(value) {
+        /* Vérifier que créationDate existe et qu'il est de type Date */
+        if (value && !(value instanceof Date)) {
+            throw new Error("CreationDate du panier doit être une date");
+        }
+        this._creationDate = value;
+    }
+
+    set idCart(value) {
+        if (typeof value !== 'number') {
+            throw new Error("value du panier doit être un nombre");
+        }
+        //Vérification des valeurs vides
+        if(isNaN(value)) {
+            throw new Error("value ne peut être NaN.")
+        }
+        this._idCart = value;
+    }
+
+    set listOfProducts(value) {
+        this.#listOfProducts = value;
+    }
+
     set validationCartDate(newDate){
         this.#validationCartDate = newDate;
     }
@@ -72,24 +92,24 @@ export default class Cart {
     /**
      *
      * @param {Article} newArticle - L'article à ajouter
+     * @param {number} quantity - la quantité à ajouter
      */
-    addArticle(newArticle) {
-        if (newArticle instanceof Article) {
-            /* vérifier si l'article est déjà présent dans le panier */
-            const isArticleExists = this.listOfArticles.find(
-                (article) => article.getReference === newArticle.getReference
-            );
-            if (isArticleExists) {
-                console.log(`${newArticle} est déjà présent dans la liste`);
-                let quantity = newArticle.quantity;
-                let originalQuantity = isArticleExists.quantity
-                isArticleExists.quantity = originalQuantity + quantity
-                console.log(`Sa quantité a été augmentée`);
-            } else {
-                this.listOfArticles.push(newArticle);
-                console.log(`${newArticle} a été ajouté à la liste des articles ${this.listOfArticles}`);
-            }
+    increaseQuantity(newArticle, quantity) {
+        /* Vérifier newArticle */
+        if (newArticle instanceof Article){
+            const productDictionary  = { 'idArticle': newArticle.reference, 'nom': newArticle.nom,
+                'appellation': newArticle.appellation, 'prix' : newArticle.prix,
+                'idCategorie' : newArticle.idCategorie, 'quantity' : quantity };
 
+            /* Recherche si un idArticle est déjà présent dans la liste de produits */
+            const isPresentInList = this.#listOfProducts.some(product => product.idArticle === newArticle.reference);
+
+            if (isPresentInList){
+                console.log(`${newArticle} est déjà présent dans la liste`);
+                /* Modification de la quantité */
+                isPresentInList.quantity = isPresentInList.quantity + quantity;
+                console.log(`la quantité a été augmentée, elle est maintenant de ${isPresentInList.quantity}`);
+            }
         } else {
             console.error("Erreur : l'élément à ajouter doit être un objet Article");
         }
@@ -97,16 +117,60 @@ export default class Cart {
 
     /**
      *
+     * @param {Article} article - dont la quantité sera réduite
+     * @param {number} quantity - quantité à enlever de produits similaires
+     */
+    decreaseQuantity(decArticle, quantity) {
+        /* Vérifier decArticle */
+        if (decArticle instanceof Article){
+
+            /* Recherche idArticle est déjà présent dans la liste de produits */
+            const isPresentInList = this.#listOfProducts.some(product => product.idArticle === decArticle.reference);
+
+            if (isPresentInList){
+                console.log(`${decArticle} est bien présent dans la liste`);
+                /* Modification de la quantité */
+                const isNewQuantityIsGreaterThanOne = isPresentInList.quantity - quantity > 1;
+
+                if (isNewQuantityIsGreaterThanOne) {
+                    console.log(`Diminution de la quantité ${isPresentInList.quantity}`)
+                    isPresentInList.quantity = isPresentInList.quantity - quantity;
+                    console.log(`la quantité maintenant de ${isPresentInList.quantity}`);
+                } else {
+                    /* suppression du produit*/
+                    this.removeProduct(decArticle);
+                    console.log(`le produit est supprimé`);
+                }
+            } else {
+                console.error(`La quantité ne peut être diminuée, le produit n'appartient pas au panier`);
+            }
+        } else {
+            console.error("Erreur : l'élément à ajouter doit être un objet Article");
+        }
+    }
+
+    /**
+     * @param {Article} newArticle - L'article à créer dans le panier
+     */
+    addProduct(newArticle) {
+        this.increaseByOne(newArticle)
+    }
+
+    /**
+     *
      * @param {Article} delArticle - L'article à supprimer
      */
-    removeArticle(delArticle) {
+    removeProduct(delArticle) {
         if (delArticle instanceof Article) {
 
-            const index = this.listOfArticles.findIndex((article) => article.getReference === delArticle.getReference);
+            const idArticle = delArticle.reference;
+
+            /* Recherche de l'index de suppression de la liste */
+            const index = this.#listOfProducts.findIndex(product => product.idArticle === idArticle);
 
             /* S'il est trouvé (différent de -1) */
             if(index !== -1 ) {
-                this.listOfArticles.splice(index, 1);
+                this.#listOfProducts.splice(index, 1);
                 console.log(`L'article a été supprimé du panier`);
             } else {
             console.error("Erreur : pas d'article trouvé dans la liste");
@@ -116,26 +180,13 @@ export default class Cart {
         }
     }
 
-        /**
+    /**
      *
      * @param {Article} newArticle - L'article dont la quantité est à augmenter d'une unité
      */
-    increaseArticleQuantity(newArticle) {
+    increaseByOne(newArticle) {
         if (newArticle instanceof Article) {
-            /* vérifier si l'article est déjà présent dans le panier */
-            const isArticleExists = this.listOfArticles.find(
-                (article) => article.id === newArticle.getReference
-            );
-            if (isArticleExists) {
-                console.log(`${newArticle} est déjà présent dans la liste`);
-                let originalQuantity = isArticleExists.quantity
-                isArticleExists.quantity = originalQuantity + 1;
-                console.log(`Sa quantité a été augmentée d'une unité`);
-            } else {
-                this.listOfArticles.push(newArticle);
-                console.log(`${newArticle} a été ajouté à la liste des articles ${this.listOfArticles}`);
-            }
-
+            this.increaseQuantity(newArticle, 1);
         } else {
             console.error("Erreur : l'élément à incrémenté doit être un objet Article");
         }
@@ -145,20 +196,20 @@ export default class Cart {
      *
      * @param {Article} decrArticle - L'article dont la quantité est à diminuer d'une unité
      */
-    decreaseArticleQuantity(decrArticle) {
+    decreaseByOne(decrArticle) {
         if (decrArticle instanceof Article) {
             /* vérifier si l'article est déjà présent dans le panier */
-            const isArticleExists = this.listOfArticles.find(
-                (article) => article.id === newArticle.getReference
-            );
-            if (isArticleExists) {
-                console.log(`${newArticle} est déjà présent dans la liste`);
-                const originalQuantity = isArticleExists.quantity
+            /* Recherche si un idArticle est déjà présent dans la liste de produits */
+            const isPresentInList = this.#listOfProducts.some(product => product.idArticle === decrArticle.reference);
+
+            if (isPresentInList) {
+                console.log(`${decrArticle} est déjà présent dans la liste`);
+                const originalQuantity = isPresentInList.quantity
                 if (originalQuantity > 1) {
-                    isArticleExists.quantity = originalQuantity - 1;
+                    isPresentInList.quantity = originalQuantity - 1;
                     console.log(`Sa quantité a été diminuée d'une unité`);
                 } else {
-                    removeArticle(decrArticle);
+                    this.removeProduct(decrArticle);
                 }
             } else {
                 console.log(`${decrArticle} n'est pas présent dans la liste des articles ${this.listOfArticles}`);
