@@ -164,5 +164,5 @@ export function addToCart(article, qty, cartEnCours){
     console.log("On va ajouter l'article " + article.reference + " au panier. Quantité : " + qty);
     console.log(cartEnCours);
     //On l'ajoute au panier TODO Pas encore fonctionnel
-    //cartEnCours.addProduct(article);
+    //cartEnCours.increaseQuantity(article, qty);
 }
