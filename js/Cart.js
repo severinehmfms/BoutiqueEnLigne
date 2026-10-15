@@ -12,13 +12,14 @@ export default class Cart {
      * 
      * @param {number} idCart - l'identifiant du panier
      * @param {Date} creationDate - la date de création du panier de type Date
-     * @param {Date} validationCartDate - la date de validation du panier de type Date 
-     * 
+     * @param {Date} validationCartDate - la date de validation du panier de type Date
+     *
+     * Si idCart n'est pas défini le panier prend le nombre de la date de maintenant.
      * Si creationDate n'est pas défini alors c'est la date d'instantiation
-     * de l'objet qui est prise en compte.
-     * Si validationCartDate n'est pas défini, par défaut, ce paramètre est null
+     * de l'objet est prise en compte.
+     * Si validationCartDate n'est pas défini, par défaut, ce paramètre est null.
      */
-    constructor(idCart, creationDate = newDate(), validationCartDate = null) {
+    constructor(idCart= Date.now(), creationDate = new Date(), validationCartDate = null) {
         if (typeof idCart !== 'number') {
             throw new Error("l'idCart du panier doit être un nombre");
         }
@@ -219,6 +220,8 @@ export default class Cart {
             console.error("Erreur : l'élément à ajouter doit être un objet Article");
         }
     }
+
+
 
     /* Méthode d'affichage des paramètres de la classe */
     toString() {
