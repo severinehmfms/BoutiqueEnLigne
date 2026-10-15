@@ -35,12 +35,12 @@ export function getAllArticles(stock) {
         //On récupère tous les articles, avec l'id de la catégorie
         categorie.articles.forEach(item => {
             let article = new Article(
-                item.id_article,
-                item.nom,
-                item.appellation,
-                item.prix_euros,
-                categorie.id_categorie
-            );
+                    item.id_article,
+                    item.nom,
+                    item.appellation,
+                    item.prix_euros,
+                    categorie.id_categorie
+                );
 
             allArticles.push(article);
         });
@@ -64,7 +64,7 @@ export function showCategories(stock, menuCategories){
             </button>
         </li>
     `;
-    //On parcourt les catégories retournées du json
+    //On parcourt les catégories retournées du json 
     stock.categories.forEach(function(item) {
 
         //On crée l'objet catégorie
@@ -88,8 +88,8 @@ export function showCategories(stock, menuCategories){
     });
 }
 
-export function showArticles(articlesToShow){
-    //On va récupérer le contenant dans lequel on souhaite écrire
+export function showArticles(articlesToShow, cartEnCours){
+    //On va récupérer le contenant dans lequel on souhaite écrire    
     let lstAarticles = document.getElementById("lst-articles");
 
     //On efface les données actuellement présentes
@@ -124,7 +124,7 @@ export function showArticles(articlesToShow){
 
     //On installe les listeners liés aux articles ici pour les remettre à jour à chaque affichage
     installListenerShopQty();
-    installListenerAddToCart();
+    installListenerAddToCart(articlesToShow, cartEnCours);
 }
 
 //Fonction qui affiche le panier (et masque la liste des articles)
@@ -160,8 +160,9 @@ export function removeQuantityPageShop(reference) {
 }
 
 //Fonction qui ajoute un article au panier
-export function addToCart(reference, qty){
-    console.log("On va ajouter l'article " + reference + " au panier. Quantité : " + qty);
-
-
+export function addToCart(article, qty, cartEnCours){
+    console.log("On va ajouter l'article " + article.reference + " au panier. Quantité : " + qty);
+    console.log(cartEnCours);
+    //On l'ajoute au panier TODO Pas encore fonctionnel
+    //cartEnCours.increaseQuantity(article, qty);
 }
