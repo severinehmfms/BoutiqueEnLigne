@@ -1,5 +1,4 @@
 export async function loadJsonData(file) {
-
     try{
         //response représente la réponse du serveur. Elle contient notamment le contenu de ton fichier JSON.
         //Mais ce contenu n'est pas encore directement utilisable comme objet JavaScript.
