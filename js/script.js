@@ -1,6 +1,7 @@
 // Importation des classes
 import Article from './Article.js';
 import Category from './Category.js';
+import Cart from './Cart.js';
 
 //Importation du fichier de fonctions et du fichier comportant les listeners
 import * as fonctions from "./fonctions.js";
@@ -34,6 +35,10 @@ async function main() {
     //On installe les listeners
     installListenerMenuCategories(menuCategories, allArticles);
     installListenerButtonCart();
+
+    //OA l'initialisation on construit le panier
+    let idcart = 1001; //TODO Est ce obligatoire d'avoir un id? 
+    let cartEnCours = new Cart(idcart);    
     
     console.log("Fin du programme");
 }
