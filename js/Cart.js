@@ -18,7 +18,7 @@ export default class Cart {
      * de l'objet qui est prise en compte.
      * Si validationCartDate n'est pas défini, par défaut, ce paramètre est null
      */
-    constructor(idCart, creationDate = new Date(), validationCartDate = null) {
+    constructor(idCart = Date.now(), creationDate = newDate(), validationCartDate = null) {
         if (typeof idCart !== 'number') {
             throw new Error("l'idCart du panier doit être un nombre");
         }
