@@ -26,7 +26,7 @@ export async function loadJsonData(file) {
 }
 
 //Fonction qui récupère un tableau avec tous les articles
-export function recupererTousLesArticles(stock) {
+export function getAllArticles(stock) {
 
     let tousLesArticles = [];
 
@@ -90,7 +90,7 @@ export function showCategories(stock, menuCategories){
 
 }
 
-export function afficherArticles(articlesToShow){
+export function showArticles(articlesToShow){
     //On va récupérer le contenant dans lequel on souhaite écrire    
     let lstAarticles = document.getElementById("lst-articles");
     //On efface les données actuellement présentes
@@ -128,7 +128,7 @@ export function afficherArticles(articlesToShow){
 }
 
 //Fonction qui affiche le panier (et masque la liste des articles)
-export function afficherPagePanier() {
+export function showPageCart() {
     let lstArticles = document.getElementById("lst-articles");
     let panier = document.getElementById("panier");
     lstArticles.classList.add("d-none");
@@ -136,7 +136,7 @@ export function afficherPagePanier() {
 }
 
 //Fonction qui affiche la boutique (et masque le panier)
-export function afficherBoutique() {
+export function showShop() {
     let lstArticles = document.getElementById("lst-articles");
     let panier = document.getElementById("panier");
     panier.classList.add("d-none");

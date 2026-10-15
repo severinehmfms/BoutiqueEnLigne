@@ -4,8 +4,8 @@ import Category from './Category.js';
 
 //Importation du fichier de fonctions et du fichier comportant les listeners
 import * as fonctions from "./fonctions.js";
-import { installerListenerMenuCategories } from "./listeners.js";
-import { installerListenerBoutonPanier } from "./listeners.js";
+import { installListenerMenuCategories } from "./listeners.js";
+import { installListenerButtonCart } from "./listeners.js";
 
 async function main() {
 
@@ -22,15 +22,15 @@ async function main() {
     fonctions.showCategories(stock, menuCategories);
         
     //A l'initialisation on récupère tous les articles quelque soit la catégorie
-    let allArticles = fonctions.recupererTousLesArticles(stock);
+    let allArticles = fonctions.getAllArticles(stock);
     
     //On affiche tous les articles
-    fonctions.afficherArticles(allArticles);
+    fonctions.showArticles(allArticles);
 
     //On installe les listeners
-    installerListenerMenuCategories(menuCategories, allArticles);
-    installerListenerBoutonPanier();
-    
+    installListenerMenuCategories(menuCategories, allArticles);
+    installListenerButtonCart();
+
 
     console.log("Fin du programme");
 }

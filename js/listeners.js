@@ -1,6 +1,6 @@
 import * as fonctions from "./fonctions.js";
 
-export function installerListenerMenuCategories(menuCategories, allArticles) {
+export function installListenerMenuCategories(menuCategories, allArticles) {
     //On ajoute le listener au menu des catégories qui va actualiser la liste des articles affichés
     menuCategories.addEventListener("click", function(event) {
         // On vérifie si le clic concerne un bouton de catégorie
@@ -28,18 +28,18 @@ export function installerListenerMenuCategories(menuCategories, allArticles) {
         }
 
         //On affiche les articles
-        fonctions.afficherArticles(articlesAAfficher);
+        fonctions.showArticles(articlesAAfficher);
 
         //On affiche la boutique
-        fonctions.afficherBoutique();
+        fonctions.showShop();
     });
 }
 
-export function installerListenerBoutonPanier(){
+export function installListenerButtonCart(){
     //On ajoute le listener sur le bouton "Panier" qui affiche le panier
     let boutonPanier = document.getElementById("bouton-panier");
     boutonPanier.addEventListener("click", function(event) {
         //On affiche le panier
-        fonctions.afficherPagePanier();
+        fonctions.showPageCart();
     });
 }
