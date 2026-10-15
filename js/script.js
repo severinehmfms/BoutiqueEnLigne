@@ -37,8 +37,8 @@ async function main() {
     installListenerButtonCart();
 
     //OA l'initialisation on construit le panier
-    let idcart = 1001; //TODO Est ce obligatoire d'avoir un id? 
-    let cartEnCours = new Cart(idcart);    
+    //let idcart = 1001; //TODO Est ce obligatoire d'avoir un id? 
+    let cartEnCours = new Cart();    
     
     console.log("Fin du programme");
 }
