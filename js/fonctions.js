@@ -161,7 +161,7 @@ export function showCart(cartEnCours){
                                     ${product.appellation} 
                                 </p>
                                 <p class="mb-0 fw-semibold">
-                                    ${product.prix}  € / bouteille
+                                    ${product.prix.toFixed(2)}  € / bouteille
                                 </p>
                             </div>
 
@@ -177,7 +177,7 @@ export function showCart(cartEnCours){
                             <!-- Sous-total et suppression -->
                             <div class="col-5 col-sm-auto text-end">
                                 <p class="fw-bold mb-2 text-vin">
-                                    ${product.prix * product.quantity} €
+                                    ${(product.prix * product.quantity).toFixed(2)}€
                                 </p>
                                 <button class="btn btn-sm btn-outline-danger" type="button"><i class="bi bi-trash"></i> Supprimer</button>
                             </div>
@@ -194,7 +194,7 @@ export function showCart(cartEnCours){
             <div class="d-flex justify-content-between mb-3">
                 <span>Total</span>
                 <!-- TODO Zone à mettre à jour-->
-                <strong id="total-panier">${cartEnCours.calculateTotalItems()} €</strong>
+                <strong id="total-panier">${cartEnCours.calculateTotalItems().toFixed(2)} €</strong>
             </div>
 
             <button type="button" class="btn btn-commande w-100"> Passer la commande </button>
