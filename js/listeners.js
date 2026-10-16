@@ -103,5 +103,27 @@ export function installListenerAddToCart(articlesPageCourante, cartEnCours){  //
             fonctions.addToCart(article, qty, cartEnCours);
         });
     });
+}
+
+//On ajoute un listener sur les boutons ajouter et retirer du panier quand il est affiché
+export function installListenerDelToCart(articlesPageCourante, cartEnCours){  //
+    const boutonAdd = document.getElementById('add-cart');
+    const boutonDel = document.getElementById('del-cart');
+    const productQuantity = document.getElementById("product-quantity").textContent;
+
+    boutonAdd.addEventListener("click", function(event) {
+        const reference = event.currentTarget.dataset.idArticle;
+        const inputQty = document.getElementById("input-shop-qty-" + reference);
+        const qty = parseInt(inputQty.value);
+
+        console.log(articlesPageCourante);
+
+        //On récupère l'objet article correspondant à la référence
+        const article = articlesPageCourante.find(function(article) {
+            return article.reference == reference;
+        });
+
+        fonctions.addToCart(article, 1, cartEnCours);
+    });
 
 }
