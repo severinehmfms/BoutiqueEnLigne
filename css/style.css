@@ -35,3 +35,33 @@ body {
     color: #ffffff;
 }
 
+/* Affichage du panier */
+.panier {
+    background-color: #F1E5D5;
+    border-radius: 12px;
+    padding: 18px;
+    border-top: 2px solid #A77B42;
+}
+
+.text-vin {
+    color: #6F2929;
+}
+
+.card {
+    background-color: #FFFCF7;
+    border-radius: 12px;
+}
+
+
+/* Bouton pour passer la commande */
+.btn-commande {
+    background-color: #6F2929;
+    color: white;
+    border: 1px solid #6F2929;
+    padding: 12px;
+}
+
+.btn-commande:hover {
+    background-color: #542020;
+    color: white;
+}

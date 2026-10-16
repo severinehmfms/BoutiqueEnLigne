@@ -52,7 +52,7 @@ export default class Cart {
         return this.#creationDate;
     }
 
-    get listOfArticles() {
+    get listOfProducts() {
         return this.#listOfProducts;
     }
 

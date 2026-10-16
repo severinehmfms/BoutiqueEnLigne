@@ -128,7 +128,89 @@ export function showArticles(articlesToShow, cartEnCours){
     installListenerAddToCart(articlesToShow, cartEnCours);
 }
 
-//Fonction qui affiche le panier (et masque la liste des articles)
+export function showCart(cartEnCours){
+    //On va récupérer le contenant dans lequel on souhaite écrire    
+    let divpanier = document.getElementById("panier");
+
+    //On efface les données actuellement présentes
+    divpanier.innerHTML = "";
+
+    if(cartEnCours instanceof Cart){
+        console.log(cartEnCours);
+        console.log(`${cartEnCours} est un bien un objet Cart - On va afficher le panier`);
+        // Articles : ${cartEnCours.allProductToString()} <br/>
+        divpanier.innerHTML += `Date : ${cartEnCours.creationDate.toLocaleDateString()} <br/> 
+        <div class="card mb-3 border-0 shadow-sm" id="lst-articles-panier">                      
+        `;
+        
+        if (cartEnCours.listOfProducts !== undefined) {
+            console.log("Liste des produits : " + cartEnCours.listOfProducts);
+            //console.log("Produit en première position : " + cartEnCours.listOfProducts[0]);
+
+            cartEnCours.listOfProducts.forEach(function(product) {
+                divpanier.innerHTML += `
+                    <div class="card-body">
+                        <div class="row align-items-center g-3">
+
+                            <!-- Informations sur le vin -->
+                            <div class="col-12 col-sm">
+                                <h6 class="fw-bold mb-1 text-vin">
+                                    ${product.idArticle} - ${product.nom} 
+                                </h6>
+                                <p class="text-secondary small mb-2">
+                                    ${product.appellation} 
+                                </p>
+                                <p class="mb-0 fw-semibold">
+                                    ${product.prix}  € / bouteille
+                                </p>
+                            </div>
+
+                            <!-- Quantité -->
+                            <div class="col-7 col-sm-4">
+                                <div class="input-group input-group-sm">
+                                    <button class="btn btn-outline-secondary" type="button">−</button>
+                                    ${product.quantity}
+                                    <button class="btn btn-outline-secondary" type="button">+</button>
+                                </div>
+                            </div>
+
+                            <!-- Sous-total et suppression -->
+                            <div class="col-5 col-sm-auto text-end">
+                                <p class="fw-bold mb-2 text-vin">
+                                    ${product.prix * product.quantity} €
+                                </p>
+                                <button class="btn btn-sm btn-outline-danger" type="button"><i class="bi bi-trash"></i> Supprimer</button>
+                            </div>
+
+                        </div>
+                    </div>
+                `;
+
+            });
+        }
+
+        divpanier.innerHTML += `
+            </div>
+            <div class="d-flex justify-content-between mb-3">
+                <span>Total</span>
+                <!-- TODO Zone à mettre à jour-->
+                <strong id="total-panier">${cartEnCours.calculateTotalItems()} €</strong>
+            </div>
+
+            <button type="button" class="btn btn-commande w-100"> Passer la commande </button>
+            `;
+
+
+    } else {
+        console.error(`${cartEnCours} n'est pas un objet Cart`);
+    }
+
+    //TODO Il faudra lancer l'installation des listeners spécifiques du panier ici (voir comme fonction précédente)
+
+
+}
+
+//Fonction qui affiche le div du panier (et masque la liste des articles)
 export function showPageCart() {
     let lstArticles = document.getElementById("lst-articles");
     let panier = document.getElementById("panier");
