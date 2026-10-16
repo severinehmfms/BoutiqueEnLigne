@@ -145,7 +145,7 @@ export function showCart(cartEnCours){
         
         if (cartEnCours.listOfProducts !== undefined) {
             console.log("Liste des produits : " + cartEnCours.listOfProducts);
-            console.log("Produit en première position : " + cartEnCours.listOfProducts[0]);
+            //console.log("Produit en première position : " + cartEnCours.listOfProducts[0]);
 
             cartEnCours.listOfProducts.forEach(function(product) {
                 divpanier.innerHTML += `
@@ -177,7 +177,7 @@ export function showCart(cartEnCours){
                             <!-- Sous-total et suppression -->
                             <div class="col-5 col-sm-auto text-end">
                                 <p class="fw-bold mb-2 text-vin">
-                                    25,80 €
+                                    ${product.prix * product.quantity} €
                                 </p>
                                 <button class="btn btn-sm btn-outline-danger" type="button"><i class="bi bi-trash"></i> Supprimer</button>
                             </div>
