@@ -223,24 +223,28 @@ export default class Cart {
         }
     }
 
-
     /**
-     *  Méthode qui permet de connaître tout ce qu'il y a dans le panier
-     * @returns {string} le message d'information de la liste de produits du panier
+     * Méthode qui permet de calculer le montant total d'un seul produit
+     * @param {number} idProduct - l'identifiant du produit
+     * @return {number} price - Le prix total du produit calculé.
      */
-    allProductToString(){
+    calculateTotalProduct(idProduct){
+        let price = 0.0;
+        if (typeof idProduct !== 'number') {
+            console.error("l'idCart du panier doit être un nombre");
+        } else {
 
-        let message = "";
-        this.#listOfProducts.forEach((product, index) => {
-            message += `Index ${index} : \n
-            ${product.idArticle} \n
-            ${product.nom} \n
-            ${product.appellation} \n
-            ${product.prix} \n
-            ${product.quantity} `;
-        });
+            // Rechercher le produit par son id
+            const existingProduct = this.#listOfProducts.find(product => product.idArticle === idProduct);
 
-        return message;
+            if(existingProduct){
+                console.log(`L'idProduct ${idProduct} a bien permis de trouver le produit recherché.`)
+                price = existingProduct.price * existingProduct.quantity;
+            } else {
+                console.log(`L'idProduct ${idProduct} n'a pas permis de trouver le produit recherché.`)
+            }
+        }
+        return price;
     }
 
     /**
@@ -254,6 +258,28 @@ export default class Cart {
         });
 
         return price;
+    }
+
+
+    /**
+     *  Méthode qui permet de connaître tout ce qu'il y a dans le panier
+     * @returns {string} le message d'information de la liste de produits du panier
+     */
+    allProductToString(){
+
+        let message = "";
+        let totalProductPrice = 0.0;
+        this.#listOfProducts.forEach((product, index) => {
+            message += `Index: ${index} : \n
+            idProduit: ${product.idArticle} \n
+            nom: ${product.nom} \n
+            appellation: ${product.appellation} \n
+            prix unitaire: ${product.prix} \n
+            quantité:${product.quantity} 
+            Total du produit: ${this.calculateTotalProduct(product.idArticle)}`;
+        });
+
+        return message;
     }
 
     /* Méthode d'affichage des paramètres de la classe */
