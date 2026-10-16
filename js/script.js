@@ -34,7 +34,7 @@ async function main() {
     
     //On installe les listeners pour les menus des catégories et pour le bouton panier
     installListenerMenuCategories(menuCategories, allArticles, cartEnCours);
-    installListenerButtonCart();        
+    installListenerButtonCart(cartEnCours);
     
     //On affiche tous les articles
     fonctions.showArticles(allArticles, cartEnCours);
