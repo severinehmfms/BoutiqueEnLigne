@@ -168,9 +168,9 @@ export function showCart(cartEnCours){
                             <!-- Quantité -->
                             <div class="col-7 col-sm-4">
                                 <div class="input-group input-group-sm">
-                                    <button class="btn btn-outline-secondary" type="button">−</button>
-                                    ${product.quantity}
-                                    <button class="btn btn-outline-secondary" type="button">+</button>
+                                    <button class="btn btn-outline-secondary" id="del-cart" type="button">−</button>
+                                    <span id="product-quantity">${product.quantity}</span>
+                                    <button class="btn btn-outline-secondary" id="add-cart" type="button">+</button>
                                 </div>
                             </div>
 
@@ -206,6 +206,8 @@ export function showCart(cartEnCours){
     }
 
     //TODO Il faudra lancer l'installation des listeners spécifiques du panier ici (voir comme fonction précédente)
+    //On installe les listeners liés au panier ici pour les remettre à jour à chaque affichage
+    installListenerAddToCart(cartEnCours);
 
 
 }
