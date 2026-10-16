@@ -52,7 +52,7 @@ export default class Cart {
         return this.#creationDate;
     }
 
-    get listOfArticles() {
+    get listOfProducts() {
         return this.#listOfProducts;
     }
 
@@ -230,20 +230,23 @@ export default class Cart {
      */
     calculateTotalProduct(idProduct){
         let price = 0.0;
-        if (typeof idProduct !== 'number') {
-            console.error("l'idCart du panier doit être un nombre");
-        } else {
-
+        let num = 0;
+        console.log(`idProduct : ${idProduct}`);
+        try {
+            num = Number(idProduct);
             // Rechercher le produit par son id
             const existingProduct = this.#listOfProducts.find(product => product.idArticle === idProduct);
 
             if(existingProduct){
                 console.log(`L'idProduct ${idProduct} a bien permis de trouver le produit recherché.`)
-                price = existingProduct.price * existingProduct.quantity;
+                price = existingProduct.prix * existingProduct.quantity;
             } else {
                 console.log(`L'idProduct ${idProduct} n'a pas permis de trouver le produit recherché.`)
             }
+        } catch (e) {
+            console.error(`Une erreur s'est déclenchée pendant le transtypage de idProduct : \n${e}`);
         }
+
         return price;
     }
 
@@ -267,16 +270,19 @@ export default class Cart {
      */
     allProductToString(){
 
-        let message = "";
+        let message = "\n";
         let totalProductPrice = 0.0;
         this.#listOfProducts.forEach((product, index) => {
+            console.log(`idProduct : ${product.idArticle}`);
+            console.log(`calculate : ${this.calculateTotalProduct(product.idArticle)}`);
+            const totalProductPrice = this.calculateTotalProduct(product.idArticle);
             message += `Index: ${index} : \n
             idProduit: ${product.idArticle} \n
             nom: ${product.nom} \n
             appellation: ${product.appellation} \n
             prix unitaire: ${product.prix} \n
-            quantité:${product.quantity} 
-            Total du produit: ${this.calculateTotalProduct(product.idArticle)}`;
+            quantité:${product.quantity} \n
+            Total du produit: ${totalProductPrice} € \n`;
         });
 
         return message;
