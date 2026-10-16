@@ -42,10 +42,4 @@ python3 -m http.server 8000
 
 Il suffit de ce rendre à l'adresse suivante: (à adapter si un port différent du 8000 est choisi) :
 
-<http://0.0.0.0:8000>
-
-
-
-
-
-
+<http://127.0.0.1:8000>

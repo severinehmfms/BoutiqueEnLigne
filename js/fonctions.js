@@ -1,6 +1,7 @@
 // Importation des classes
 import Article from './Article.js';
 import Category from './Category.js';
+import Cart from './Cart.js';
 //Importation des listeners directement liés aux articles affichés
 import { installListenerShopQty } from "./listeners.js";
 import { installListenerAddToCart } from "./listeners.js";
@@ -161,8 +162,26 @@ export function removeQuantityPageShop(reference) {
 
 //Fonction qui ajoute un article au panier
 export function addToCart(article, qty, cartEnCours){
-    console.log("On va ajouter l'article " + article.reference + " au panier. Quantité : " + qty);
-    console.log(cartEnCours);
-    //On l'ajoute au panier TODO Pas encore fonctionnel
-    //cartEnCours.increaseQuantity(article, qty);
+    console.log("On va ajouter l'article " + article.reference + " au panier. \nQuantité : " + qty);
+    if(cartEnCours instanceof Cart){
+        console.log(`${cartEnCours} est un bien un objet Cart`);
+        cartEnCours.increaseQuantity(article, qty);
+        console.log(`Affichage du panier:  ${cartEnCours}`);
+        console.log(`Affichage du prix du panier: ${cartEnCours.calculateTotalItems()} Euros`);
+    } else {
+        console.error(`${cartEnCours} n'est pas un objet Cart`);
+    }
+}
+
+//Fonction qui ajoute un article au panier
+export function delToCart(article, qty, cartEnCours){
+    console.log("On va enlever l'article " + article.reference + " au panier. \nQuantité : " + qty);
+    if(cartEnCours instanceof Cart){
+        console.log(`${cartEnCours} est un bien un objet Cart`);
+        cartEnCours.decreaseQuantity(article, qty);
+        console.log(`Affichage du panier:  ${cartEnCours}`);
+        console.log(`Affichage du prix du panier: ${cartEnCours.calculateTotalItems()} Euros`);
+    } else {
+        console.error(`${cartEnCours} n'est pas un objet Cart`);
+    }
 }
