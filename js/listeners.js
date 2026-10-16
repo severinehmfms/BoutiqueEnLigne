@@ -37,10 +37,12 @@ export function installListenerMenuCategories(menuCategories, allArticles, cartE
 }
 
 //Installation du listener sur le bouton Panier qui affiche le panier
-export function installListenerButtonCart(){
+export function installListenerButtonCart(cartEnCours){
     //On ajoute le listener sur le bouton "Panier" qui affiche le panier
     let boutonPanier = document.getElementById("bouton-panier");
     boutonPanier.addEventListener("click", function(event) {
+        //On remplit les informations du panier
+        fonctions.showCart(cartEnCours);
         //On affiche le panier
         fonctions.showPageCart();
     });
