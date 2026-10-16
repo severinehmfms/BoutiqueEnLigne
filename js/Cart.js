@@ -9,11 +9,11 @@ export default class Cart {
 
     /**
      * Constructeur avec des éléments, l'id et la date de création du panier
-     * 
+     *
      * @param {number} idCart - l'identifiant du panier
      * @param {Date} creationDate - la date de création du panier de type Date
-     * @param {Date} validationCartDate - la date de validation du panier de type Date 
-     * 
+     * @param {Date} validationCartDate - la date de validation du panier de type Date
+     *
      * Si creationDate n'est pas défini alors c'est la date d'instantiation
      * de l'objet qui est prise en compte.
      * Si validationCartDate n'est pas défini, par défaut, ce paramètre est null
@@ -99,19 +99,19 @@ export default class Cart {
         if (newArticle instanceof Article){
 
 
-            // Recherche si un idArticle est déjà présent dans la liste de produits 
+            // Recherche si un idArticle est déjà présent dans la liste de produits
             const existingProduct = this.#listOfProducts.find(product => product.idArticle === newArticle.reference);
 
             if (existingProduct){
                 console.log(`${newArticle} est déjà présent dans la liste`);
-                // Modification de la quantité 
+                // Modification de la quantité
                 existingProduct.quantity += quantity;
                 console.log(`la quantité a été augmentée, elle est maintenant de ${existingProduct.quantity}`);
             } else {
                 console.log(`Ajout d'un nouveau produit`);
                 const productDictionary  = { 'idArticle': newArticle.reference, 'nom': newArticle.nom,
-                'appellation': newArticle.appellation, 'prix' : newArticle.prix,
-                'idCategorie' : newArticle.idCategorie, 'quantity' : quantity };
+                    'appellation': newArticle.appellation, 'prix' : newArticle.prix,
+                    'idCategorie' : newArticle.idCategorie, 'quantity' : quantity };
                 this.#listOfProducts.push(productDictionary);
             }
         } else {
@@ -125,14 +125,14 @@ export default class Cart {
      * @param {number} quantity - quantité à enlever de produits similaires
      */
     decreaseQuantity(decArticle, quantity) {
-        // Vérifier decArticle 
+        // Vérifier decArticle
         if (decArticle instanceof Article){
 
-            // Recherche idArticle est déjà présent dans la liste de produits 
+            // Recherche idArticle est déjà présent dans la liste de produits
             const existingProduct = this.#listOfProducts.find(product => product.idArticle === decArticle.reference);
             if (existingProduct){
                 console.log(`${decArticle} est bien présent dans la liste`);
-                // Modification de la quantité 
+                // Modification de la quantité
                 const isNewQuantityIsGreaterThanOne = existingProduct.quantity - quantity > 1;
 
                 if (isNewQuantityIsGreaterThanOne) {
@@ -168,15 +168,15 @@ export default class Cart {
 
             const idArticle = delArticle.reference;
 
-            // Recherche de l'index de suppression de la liste 
+            // Recherche de l'index de suppression de la liste
             const index = this.#listOfProducts.findIndex(product => product.idArticle === idArticle);
 
-            // S'il est trouvé (différent de -1) 
+            // S'il est trouvé (différent de -1)
             if(index !== -1 ) {
                 this.#listOfProducts.splice(index, 1);
                 console.log(`L'article a été supprimé du panier`);
             } else {
-            console.error("Erreur : pas d'article trouvé dans la liste");
+                console.error("Erreur : pas d'article trouvé dans la liste");
             }
         } else {
             console.error("Erreur : l'élément à supprimer doit être un objet Article");
@@ -201,8 +201,8 @@ export default class Cart {
      */
     decreaseByOne(decrArticle) {
         if (decrArticle instanceof Article) {
-            // vérifier si l'article est déjà présent dans le panier 
-            // Recherche si un idArticle est déjà présent dans la liste de produits 
+            // vérifier si l'article est déjà présent dans le panier
+            // Recherche si un idArticle est déjà présent dans la liste de produits
             const existingProduct = this.#listOfProducts.find(product => product.idArticle === decrArticle.reference);
 
             if (existingProduct) {
@@ -226,7 +226,7 @@ export default class Cart {
 
     /**
      *  Méthode qui permet de connaître tout ce qu'il y a dans le panier
-     * @returns {string} le message d'information de la liste de produits du panier 
+     * @returns {string} le message d'information de la liste de produits du panier
      */
     allProductToString(){
 
@@ -239,7 +239,7 @@ export default class Cart {
             ${product.prix} \n
             ${product.quantity} `;
         });
-        
+
         return message;
     }
 
@@ -255,7 +255,6 @@ export default class Cart {
 
         return price;
     }
-
 
     /* Méthode d'affichage des paramètres de la classe */
     toString() {
